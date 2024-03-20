@@ -22,7 +22,7 @@ public class Exmousebutton : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Hp = -10;
+            Hp -= 10;
             Debug.Log("Ã¼·Â : " + Hp);
             if( Hp <= 0)
             {
