@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Extest : MonoBehaviour
 {
-    public float age;      // 변수 int(정수형) age 라는 이름으로 선언, float(소수점), 
+   public float age;      // 변수 int(정수형) age 라는 이름으로 선언, float(소수점), 
 
     // Start is called before the first frame update
     void Start()
