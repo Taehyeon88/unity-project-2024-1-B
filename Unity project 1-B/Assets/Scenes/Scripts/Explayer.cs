@@ -43,7 +43,17 @@ public class Explayer : MonoBehaviour
         {
             point = 0;
             gameObject.transform.position = new Vector3(0.0f, 3.0f, 0.0f);
-            Debug.Log(collision.gameObject.name);      //해당오브젝트의 이름을 출력한다
+            Debug.Log(collision.gameObject.tag);      //해당오브젝트의 이름을 출력한다
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Item"))     //CompareTag함수는 지어진 Tag("Item") 이름을 검사한다
+         {
+            Debug.Log("아이템과 충돌함");  
+            point += 1;                    //10점 포인트를 올린다. point = point + 1 의 줄임표현
+            Destroy(other.gameObject);     //파괴한다
         }
     }
 }
