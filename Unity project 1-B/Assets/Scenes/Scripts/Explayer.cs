@@ -42,7 +42,7 @@ public class Explayer : MonoBehaviour
         if(collision != null)                          //충돌물체가 존재할 경우
         {
             point = 0;
-            gameObject.transform.position = new Vector3(0.0f, 3.0f, 0.0f);
+            gameObject.transform.position = new Vector3(0.0f, 12.0f, 0.0f);
             Debug.Log(collision.gameObject.tag);      //해당오브젝트의 이름을 출력한다
         }
     }
