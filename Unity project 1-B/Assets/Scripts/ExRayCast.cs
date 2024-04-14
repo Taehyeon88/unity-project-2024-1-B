@@ -23,7 +23,7 @@ public class ExRayCast : MonoBehaviour
         if(GameTime <= 0)                                                 //0초가 되면
         {
             PlayerPrefs.SetInt("Point", Point);                           //유니티에서 제공하는 저장 함수
-            SceneManager.LoadScene("MainScenes");                         //MainScene으로 이동한다.
+            SceneManager.LoadScene("MainScene");                         //MainScene으로 이동한다.
         }
          
         pointUI.text = "점수 : " + Point.ToString();                      //UI 점수 표시
