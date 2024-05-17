@@ -7,10 +7,18 @@ public class CircleObject : MonoBehaviour
     public bool isDrag;
     public bool isUsed;
     Rigidbody2D rigidbody2D;
-    void Start()
+
+    public int index;       //과일 번호를 만든다.
+
+
+    void Awake()                                    //시작하기전 소스단계에서 
     {
         isUsed = false;                             //사용 완료가 되지 않음(처음 사용)
         rigidbody2D = GetComponent<Rigidbody2D>();  //강체를 가져온다.
+        rigidbody2D.simulated = false;              //생성될때는 시뮬레이팅 되지 않는다.
+    }
+    void Start()
+    {
 
     }
 
@@ -54,6 +62,40 @@ public class CircleObject : MonoBehaviour
         if(Temp != null)
         {
             Temp.gameObject.GetComponent<GameManeger>().GenObject();
+        }
+    }
+
+    public void Used()
+    {
+        isDrag = false;
+        isUsed = true;
+        rigidbody2D.simulated = true;
+    }
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (index >= 7)
+            return;
+
+        if(collision.gameObject.tag == "Fruit")          //충돌물체의 tag가 fruit일 경우
+        {
+            CircleObject temp = collision.gameObject.GetComponent<CircleObject>();  //임시로 Class temp를 선언하고 충돌체의 class(CircleObject)를 받아온다.
+
+            if(temp.index ==index) //과일 번호가 같은 경우
+            {
+                if(gameObject.GetInstanceID() > collision.gameObject.GetInstanceID())   //유니티에서 지원하는 고유의 ID를 받아와서 ID가 큰쪽에서 다음 과일 생성
+                {
+                    //GameManeger 에서 생성함수 호출
+                    GameObject Temp = GameObject.FindWithTag("GameManeger");
+                    if (Temp != null)
+                    {
+                        Temp.gameObject.GetComponent<GameManeger>().MergeObject(index, gameObject.transform.position); //생성된 MerageObject함수에 인수와 함께 전달
+                    }
+                    
+                    Destroy(temp.gameObject);                    //충돌 물체 파괴
+                    Destroy(gameObject);                         //자기 자신 파괴
+                }
+            }
         }
     }
 }
