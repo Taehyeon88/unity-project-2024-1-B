@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Build.Content;
 using UnityEngine;
 
 public class CircleObject : MonoBehaviour
@@ -10,16 +11,20 @@ public class CircleObject : MonoBehaviour
 
     public int index;       //과일 번호를 만든다.
 
+    public float EndTime = 0.0f;                    
+    public SpriteRenderer spriteRenderer;           //종료시 스프라이트 색을 변환 시키기 위해 접근 선언
 
+    public GameManeger gameManeger;                 //GameManeger 접근을 선언
     void Awake()                                    //시작하기전 소스단계에서 
     {
         isUsed = false;                             //사용 완료가 되지 않음(처음 사용)
         rigidbody2D = GetComponent<Rigidbody2D>();  //강체를 가져온다.
         rigidbody2D.simulated = false;              //생성될때는 시뮬레이팅 되지 않는다.
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
     void Start()
     {
-
+        gameManeger = GameObject.FindWithTag("GameManeger").GetComponent<GameManeger>();     //게임매니저를 얻어온다.
     }
 
     void Update()
@@ -70,6 +75,32 @@ public class CircleObject : MonoBehaviour
         isDrag = false;
         isUsed = true;
         rigidbody2D.simulated = true;
+    }
+
+    public void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "EndLine")
+        {
+            EndTime += Time.deltaTime;
+
+            if(EndTime > 1)
+            {
+                spriteRenderer.color = new Color(0.9f, 0.2f, 0.2f);
+            }
+            if(EndTime >3)
+            {
+                gameManeger.EndGame();
+            }
+        }
+    }
+
+    public void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.tag == "EndLine")
+        {
+            EndTime = 0.0f;
+            spriteRenderer.color = Color.white;
+        }
     }
 
     public void OnCollisionEnter2D(Collision2D collision)
