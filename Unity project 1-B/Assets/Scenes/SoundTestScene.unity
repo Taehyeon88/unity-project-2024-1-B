@@ -785,14 +785,14 @@ MonoBehaviour:
   - name: BackGround
     clip: {fileID: 8300000, guid: 475f4837af487ce4a9e68bb227455e4c, type: 3}
     volume: 0.28
-    pitch: 0
+    pitch: 1
     loop: 0
     mixerGroup: {fileID: 4883204028939261091, guid: 91c386a66a82bd14bbbfe0dd8036437b, type: 2}
     source: {fileID: 0}
   - name: Cannon
     clip: {fileID: 8300000, guid: af66162561d2eed40ad49268cab318bb, type: 3}
     volume: 0.26
-    pitch: 0
+    pitch: 1
     loop: 0
     mixerGroup: {fileID: -619281287124134081, guid: 91c386a66a82bd14bbbfe0dd8036437b, type: 2}
     source: {fileID: 0}
